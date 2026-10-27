@@ -1,0 +1,46 @@
+#include<bits/stdc++.h>
+using namespace std;
+bool cmp(vector<int>& a, vector<int>& b){
+    return a[1] < b[1];
+}
+class Solution {
+public:
+    vector<vector<int>> merge(vector<vector<int>>& intervals) {
+        sort(intervals.begin(), intervals.end(), cmp);
+        int n = intervals.size();
+        if(n <= 1) return intervals;
+        vector<vector<int>> ans;
+        int start = intervals[n-1][0];
+        int end = intervals[n-1][1];
+        for(int i=n-2;i>=0;i--){
+            if(intervals[i][1] >= start){
+                start = min(start, intervals[i][0]);
+            }
+            else{
+                ans.push_back({start, end});
+                start = intervals[i][0];
+                end = intervals[i][1];
+            }
+        }
+        ans.push_back({start, end});
+        reverse(ans.begin(), ans.end());
+        return ans;
+    }
+};
+int main(){
+    int n;
+    cout<<"Enter n : ";
+    cin>>n;
+    vector<vector<int>> intervals;
+    for(int i=0;i<n;i++){
+        int a, b;
+        cin>>a>>b;
+        intervals.push_back({a, b});
+    }
+    Solution s;
+    vector<vector<int>> result = s.merge(intervals);
+    for(auto res : result){
+        for(auto x : res) cout<<x<<" ";
+        cout<<endl;
+    }
+}
