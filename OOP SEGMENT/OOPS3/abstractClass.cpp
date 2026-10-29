@@ -20,6 +20,7 @@ public:
     }
 };
 int main(){
+    A a;
     B b;
     b.show();
     b.walk();
