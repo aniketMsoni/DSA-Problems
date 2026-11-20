@@ -9,14 +9,6 @@ public:
     Node* right;
     Node(int val) : val(val), left(NULL), right(NULL) {}
 };
-Node* succ(Node* root){
-    if(root==NULL) return NULL;
-    Node* suc = root->right;
-    while(suc->left != NULL){
-        suc = suc->left;
-    }
-    return suc;
-}
 class Solution {
 public:
     vector<int> inorderTraversal(Node* root) {
